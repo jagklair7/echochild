@@ -1,0 +1,24 @@
+[Unit]
+Description=EchoMother web app and model API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=echomother
+Group=echomother
+WorkingDirectory=/var/www/echomother
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3001
+EnvironmentFile=-/etc/echomother/echomother.env
+ExecStart=/usr/bin/node server.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
